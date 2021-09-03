@@ -1,0 +1,44 @@
+<p>todo works!</p>
+<button mat-raised-button (click)="addRecord()">Add</button>
+<!-- <mat-form-field> 
+    <mat-select placeholder="Search by country" [formControl]="countriesControl">
+        <mat-option *ngFor="let country of countries"
+                    [value]="country"
+                    (click)="searchCountries(country)">{{country}}
+        </mat-option>
+    </mat-select>
+</mat-form-field> -->
+
+<!-- <mat-form-field id="searchField">
+    <input matInput (keyup)="searchTerm$.next($event.target.value)" placeholder="Search by last name">
+      <mat-hint align="center">Enter at least first 3 letters.</mat-hint>
+  </mat-form-field> -->
+
+  <mat-table class="matTable" [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let task"> {{task.Id}} </mat-cell>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell  *matCellDef="let task">  {{task.title}} </mat-cell>
+      </ng-container>
+  
+  
+        <ng-container matColumnDef="desc">
+            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+            <mat-cell *matCellDef="let task">  {{task.desc}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let task; columns: displayedColumns;"></mat-row>
+  
+      </mat-table>
+
+      <mat-paginator #paginator
+      [pageIndex]="0"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
