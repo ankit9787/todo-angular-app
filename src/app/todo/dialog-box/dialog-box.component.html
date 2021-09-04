@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+    <input #title [(ngModel)]="taskTitle">
+    <input #desc [(ngModel)]="taskDesc">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="save(title.value, desc.value)">save</button>
+</div>
