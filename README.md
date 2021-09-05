@@ -1,30 +1,29 @@
 # TodoAngularApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+This project is hosted on Netlify(using drag drop method). (https://eloquent-bhabha-cfc95a.netlify.app/)
 
-## Development server
+Steps to run in local -
+- Clone the project
+- Go inside repo. Run "npm install" (Node must be installed)
+- Run ng serve
+- Go to browser. Enter URL- localhost:4200
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# About TodoAngularApp
 
-## Code scaffolding
+- Landing screen - 
+![image](https://user-images.githubusercontent.com/34910004/132122586-394b8aff-6cc7-4509-80a1-620fc2c4be50.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Enter details to add todo task
+![add](https://user-images.githubusercontent.com/34910004/132122622-6f5c137e-5ff7-4f8a-ab15-6468e545ae74.PNG)
 
-## Build
+- Table view after adding some task
+![table](https://user-images.githubusercontent.com/34910004/132122670-ccae1cfd-fc60-4238-8f7c-7d5dd113460f.PNG)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Use filters on left to filter on basis on Todo status
+![image](https://user-images.githubusercontent.com/34910004/132122696-d6862e4a-ded7-4fda-b5b3-fe2e9054298e.png)
 
-## Running unit tests
+- Use actions buttons on right to perform actions over tasks, like changes status, edit and delete.
+![image](https://user-images.githubusercontent.com/34910004/132122709-b914beb8-e6e4-4e0e-ab38-f9e7eafecc36.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-
-- Add angular material 
+*Note Tooltips added for interactive UI
