@@ -1,0 +1,47 @@
+.actions{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.addTodo{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 20px;
+    margin: 30px auto 45px auto;
+    width: 25%;
+    box-shadow: -5px -5px 10px 5px #888888;
+}
+
+.heading{
+    padding: 11px;
+    color: #efeca5;
+    font-weight: 600;
+    font-size: xx-large;
+    margin-left: 20px;
+}
+
+.mat-header-cell {
+    color: rgba(0,0,0,.54);
+    font-weight: 600;
+    font-size: inherit;
+    color: #357779;
+    font-style: bold;
+}
+
+.mat-table {
+    width: 60%;
+    margin: auto;
+    box-shadow: 2px brown;
+    box-shadow: -5px -5px 10px 5px #888888;
+}
+
+.navbar-strip{
+    height: 45px;
+    border-style: solid;
+    border-color: #1d1d1d;
+    background-color: #1d1d1d;
+}
+
+
+

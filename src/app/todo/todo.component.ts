@@ -16,7 +16,7 @@ import { FormGroup } from '@angular/forms/forms';
 export class TodoComponent implements OnInit {
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['status', 'title', 'desc', 'options'];
+  displayedColumns: string[] = ['status', 'title', 'options'];
   statusFilters = ['None', 'Todo', 'In Progress','Done'];
   taskForm!: FormGroup;
   todoList: todoModel[] = [];
@@ -46,7 +46,7 @@ export class TodoComponent implements OnInit {
   addTask(): void {
     let data = {
       title: this.taskForm.controls['title'].value,
-      status: 'TODO',
+      status: 'Todo',
       desc: this.taskForm.controls['desc'].value,
     };
     this.todoList.push(data);
@@ -55,7 +55,7 @@ export class TodoComponent implements OnInit {
     this.taskForm.reset();
   }
 
-  deleteRecord(task: todoModel) {
+  deleteTask(task: todoModel) {
     if( this.todoList.length === 1){
       this.loadTable = false;
     }
@@ -99,5 +99,14 @@ export class TodoComponent implements OnInit {
     }
     this.dataSource.data = this.todoList.filter(
       element => element.status !== "Done").concat(this.todoList.filter(element => element.status === "Done"));
+  }
+
+  viewDesc(){
+    let columnLength = this.displayedColumns.length;
+    if(columnLength === 3){
+      this.displayedColumns = ['status', 'title', 'desc','options'];
+    }else{
+      this.displayedColumns = ['status', 'title','options'];
+    }
   }
 }

@@ -10,7 +10,8 @@ import { todoModel } from '../todo.model';
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent {
-
+  
+  disableButton = false;
   taskDesc = '';
   taskTitle ='';
   
@@ -22,7 +23,12 @@ export class DialogBoxComponent {
   }
 
   save(title:string, desc:string): void{
-    this.dialogRef.close({title:title, desc:desc, dataObj:this.todoObj});
+    if(title.trim().length === 0 || desc.trim().length === 0){
+      this.disableButton = true;
+    }else{
+      this.disableButton = false;
+      this.dialogRef.close({title:title, desc:desc, dataObj:this.todoObj});
+    }
   }
 
   closeDialog(): void{

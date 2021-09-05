@@ -10,6 +10,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule} from '@angular/material/dialog';
 import { TodoComponent } from './todo/todo.component';
 import { DialogBoxComponent } from './todo/dialog-box/dialog-box.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { DialogBoxComponent } from './todo/dialog-box/dialog-box.component';
     MatSortModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

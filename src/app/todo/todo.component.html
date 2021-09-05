@@ -1,41 +1,110 @@
-<form [formGroup]="taskForm">
-<input type="text" formControlName="title" placeholder="Enter title">
-<input type="text" formControlName="desc" placeholder="Enter Description">
-<button mat-raised-button (click)="addTask()" type="submit" [disabled]="!taskForm.valid">Add</button>
-</form>
+<div class="navbar-strip"> 
+  <div class="heading">Todo List</div>
+</div>
+<div class="addTodo">
+  <form [formGroup]="taskForm">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Title"
+          formControlName="title"
+        />
+      </mat-form-field>
+    </div>
 
-<mat-table *ngIf = "loadTable" class="matTable" [dataSource]="dataSource" matSort>
+    <!-- <input type="text"  placeholder="Enter title"> -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="desc"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- <input type="text" formControlName="desc" placeholder="Enter Description"> -->
+    <div>
+      <button
+        mat-raised-button
+        matTooltip="Add task"
+        (click)="addTask()"
+        type="submit"
+        [disabled]="!taskForm.valid"
+      >
+        Add
+      </button>
+    </div>
+  </form>
+</div>
+
+<mat-table *ngIf="loadTable" class="matTable" [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef>
       <mat-form-field>
-        <mat-select placeholder="Status" (selectionChange)="applyFilter($event)">
+        <mat-select
+          placeholder="Status"
+          (selectionChange)="applyFilter($event)"
+        >
           <mat-option *ngFor="let status of statusFilters" [value]="status">
             {{ status }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      Status
     </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{ task.status }} </mat-cell>
+    <mat-cell *matCellDef="let task" [style.color]="task.status === 'Todo' ? '#da5000' : (task.status === 'In Progress'
+     ? '#b7b717': 'green')">
+      <mat-icon aria-hidden="false" matTooltip="Status"
+        >radio_button_checked</mat-icon
+      >
+      {{ task.status }}
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{ task.title }} </mat-cell>
+    <mat-cell *matCellDef="let task">
+      <span (click)="viewDesc()" matTooltip="View/Hide Description" [ngStyle]="{cursor: 'pointer'}"> 
+        {{ task.title }} </span> </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="desc">
     <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
     <mat-cell *matCellDef="let task"> {{ task.desc }} </mat-cell>
-    
   </ng-container>
 
   <ng-container matColumnDef="options">
     <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
     <mat-cell *matCellDef="let task">
-      <button (click)="changeStatus(task)">StatusChange</button>
-      <button (click)="deleteRecord(task)">Delete</button>
-      <button (click)="openDialog(task)">Edit</button>
+      <mat-icon
+        aria-hidden="false"
+        matTooltip="Modify status"
+        class="actions"
+        aria-label="Status change icon"
+        (click)="changeStatus(task)"
+        >playlist_add_check</mat-icon
+      >
+      <mat-icon
+        *ngIf = "task.status !== 'Done'"
+        aria-hidden="false"
+        matTooltip="Edit task"
+        class="actions"
+        aria-label="Edit icon"
+        (click)="openDialog(task)"
+        >edit</mat-icon
+      >
+      <mat-icon
+        aria-hidden="false"
+        matTooltip="Delete task"
+        class="actions"
+        aria-label="Delete icon"
+        (click)="deleteTask(task)"
+        >delete</mat-icon
+      >
     </mat-cell>
   </ng-container>
 
