@@ -1,4 +1,4 @@
-<div class="navbar-strip"> 
+<div class="navbar-strip">
   <div class="heading">Todo List</div>
 </div>
 <div class="addTodo">
@@ -56,8 +56,16 @@
         </mat-select>
       </mat-form-field>
     </mat-header-cell>
-    <mat-cell *matCellDef="let task" [style.color]="task.status === 'Todo' ? '#da5000' : (task.status === 'In Progress'
-     ? '#b7b717': 'green')">
+    <mat-cell
+      *matCellDef="let task"
+      [style.color]="
+        task.status === 'Todo'
+          ? '#da5000'
+          : task.status === 'In Progress'
+          ? '#b7b717'
+          : 'green'
+      "
+    >
       <mat-icon aria-hidden="false" matTooltip="Status"
         >radio_button_checked</mat-icon
       >
@@ -68,8 +76,14 @@
   <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
     <mat-cell *matCellDef="let task">
-      <span (click)="viewDesc()" matTooltip="View/Hide Description" [ngStyle]="{cursor: 'pointer'}"> 
-        {{ task.title }} </span> </mat-cell>
+      <span
+        (click)="viewDesc()"
+        matTooltip="View/Hide Description"
+        [ngStyle]="{ cursor: 'pointer' }"
+      >
+        {{ task.title }}
+      </span>
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="desc">
@@ -89,7 +103,7 @@
         >playlist_add_check</mat-icon
       >
       <mat-icon
-        *ngIf = "task.status !== 'Done'"
+        *ngIf="task.status !== 'Done'"
         aria-hidden="false"
         matTooltip="Edit task"
         class="actions"

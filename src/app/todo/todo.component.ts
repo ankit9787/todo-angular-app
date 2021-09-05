@@ -14,23 +14,24 @@ import { FormGroup } from '@angular/forms/forms';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit {
-
   dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['status', 'title', 'options'];
-  statusFilters = ['None', 'Todo', 'In Progress','Done'];
+  statusFilters = ['None', 'Todo', 'In Progress', 'Done'];
   taskForm!: FormGroup;
   todoList: todoModel[] = [];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
-  loadTable= true;
+  loadTable = true;
+  private sort!: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // this.dataSource.data = this.todoList;
     this.loadTable = false;
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
@@ -38,9 +39,8 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
+  setDataSourceAttributes() {
     this.dataSource.sort = this.sort;
-    this.taskForm;
   }
 
   addTask(): void {
@@ -56,12 +56,11 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTask(task: todoModel) {
-    if( this.todoList.length === 1){
+    if (this.todoList.length === 1) {
       this.loadTable = false;
     }
     this.todoList = this.todoList.filter((element) => element !== task);
     this.dataSource.data = this.todoList;
-    
   }
 
   applyFilter(filterValue: any) {
@@ -80,33 +79,35 @@ export class TodoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if(result){
-      let data = this.todoList.find((task) => task === result.dataObj);
-      if (data) {
-        data.title = result.title;
-        data.desc = result.desc;
-      }}
+      if (result) {
+        let data = this.todoList.find((task) => task === result.dataObj);
+        if (data) {
+          data.title = result.title;
+          data.desc = result.desc;
+        }
+      }
     });
   }
-//make const
-  changeStatus(task: todoModel): void{
-    if(task.status === "Todo"){
-      task.status = "In Progress";
-    }else if(task.status === "In Progress"){
-      task.status = "Done";
-    }else if(task.status === "Done"){
-      task.status = "Todo";
+
+  changeStatus(task: todoModel): void {
+    if (task.status === 'Todo') {
+      task.status = 'In Progress';
+    } else if (task.status === 'In Progress') {
+      task.status = 'Done';
+    } else if (task.status === 'Done') {
+      task.status = 'Todo';
     }
-    this.dataSource.data = this.todoList.filter(
-      element => element.status !== "Done").concat(this.todoList.filter(element => element.status === "Done"));
+    this.dataSource.data = this.todoList
+      .filter((element) => element.status !== 'Done')
+      .concat(this.todoList.filter((element) => element.status === 'Done'));
   }
 
-  viewDesc(){
+  viewDesc() {
     let columnLength = this.displayedColumns.length;
-    if(columnLength === 3){
-      this.displayedColumns = ['status', 'title', 'desc','options'];
-    }else{
-      this.displayedColumns = ['status', 'title','options'];
+    if (columnLength === 3) {
+      this.displayedColumns = ['status', 'title', 'desc', 'options'];
+    } else {
+      this.displayedColumns = ['status', 'title', 'options'];
     }
   }
 }

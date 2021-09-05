@@ -1,16 +1,22 @@
-<div mat-dialog-content> <b>Edit task</b>
+<div mat-dialog-content>
+  <b>Edit task</b>
   <mat-form-field appearance="fill">
-    <input matInput #title [(ngModel)]="taskTitle">
-
+    <input matInput #title [(ngModel)]="taskTitle" />
   </mat-form-field>
-    <mat-form-field appearance="fill">
-    <input matInput #desc [(ngModel)]="taskDesc">
-
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    <input matInput #desc [(ngModel)]="taskDesc" />
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button matTooltip="Save"
-   (click)="save(title.value, desc.value)">save</button>
-   <br>
-   <div *ngIf="disableButton" [style.color] = "'orange'">*Please enter something</div>
+  <button
+    mat-raised-button
+    matTooltip="Save"
+    (click)="save(title.value, desc.value)"
+  >
+    save
+  </button>
+  <br />
+  <div *ngIf="disableButton" [style.color]="'orange'">
+    *Please enter something
+  </div>
 </div>
