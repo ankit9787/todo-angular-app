@@ -4,7 +4,7 @@
 <button mat-raised-button (click)="addTask()" type="submit" [disabled]="!taskForm.valid">Add</button>
 </form>
 
-<mat-table class="matTable" [dataSource]="dataSource" matSort>
+<mat-table *ngIf = "loadTable" class="matTable" [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef>
       <mat-form-field>

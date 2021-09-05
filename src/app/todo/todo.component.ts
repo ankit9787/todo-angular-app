@@ -19,33 +19,19 @@ export class TodoComponent implements OnInit {
   displayedColumns: string[] = ['status', 'title', 'desc', 'options'];
   statusFilters = ['None', 'Todo', 'In Progress','Done'];
   taskForm!: FormGroup;
-  todoList: todoModel[] = [
-    {
-      title: 'Joan',
-      status: 'Todo',
-      desc: 'Brown',
-    },
-    {
-      title: 'Mort',
-      status: 'In Progress',
-      desc: 'Johnston',
-    },
-    {
-      title: 'Mort',
-      status: 'Done',
-      desc: 'Sanny',
-    },
-  ];
+  todoList: todoModel[] = [];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
+  loadTable= true;
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.dataSource.data = this.todoList;
+    // this.dataSource.data = this.todoList;
+    this.loadTable = false;
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       desc: ['', Validators.required],
@@ -65,12 +51,17 @@ export class TodoComponent implements OnInit {
     };
     this.todoList.push(data);
     this.dataSource.data = this.todoList;
+    this.loadTable = true;
     this.taskForm.reset();
   }
 
   deleteRecord(task: todoModel) {
+    if( this.todoList.length === 1){
+      this.loadTable = false;
+    }
     this.todoList = this.todoList.filter((element) => element !== task);
     this.dataSource.data = this.todoList;
+    
   }
 
   applyFilter(filterValue: any) {
